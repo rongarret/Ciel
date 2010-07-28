@@ -1,0 +1,38 @@
+Ciel is a lisp-like language implemented in C++.  What Clojure is to
+Java, Ciel is designed to be to C++.  The idea was to see how far one could
+get using off-the-shelf C++ code to build a usable system.
+
+To build Ciel you will need:
+
+* The Boehm GC (http://www.hpl.hp.com/personal/Hans_Boehm/gc/)
+* CLN, the Class Library for Numbers (http://www.ginac.de/CLN/)
+* g++
+
+To build Ciel, just install libgc and libcln, then make.  Ciel has been
+built and run on Linux and OS X Snow Leopard.
+
+At the moment Ciel is interpreted, but it is designed to be compiled
+straighforwardly into C++, and thence into native code.  Some examples of
+hand-compiled functions that can be dynamically loaded into the REPL and
+run are included.
+
+NOTES:
+
+Lambda is spelled FN.
+
+SETQ/SETF/SET! is spelled SET.  There is no separate definition form.
+
+Ciel supports Scheme-style dotted argument lists, but parameters are
+passed as vectors, not lists.  Vectors are denoted with square brackets,
+and can be extended with the VPE (vector-push-extend) operator.
+
+You can assign special operators.  So, for example, this works:
+
+(set lambda fn)
+(set def set)
+(def vector (lambda x x))
+(vector 1 2 3)
+
+This is all not even half-baked at the moment.  I'm mostly putting this
+out there to see if there is any interest in it at all.  If there is I'd
+be happy to clean things up and add capabilities.

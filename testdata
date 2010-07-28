@@ -1,0 +1,26 @@
+
+(set <= lte)
+(set + plus)
+(set - minus)
+(set * times)
+(set / div)
+(set fib (fn (n) (if (<= n 1) 1 (+ (fib (- n 1)) (fib (- n 2))))))
+(fib 10)
+(time (fib 20))
+
+(set fact (fn (n) (if (<= n 1) 1 (* n (fact (- n 1))))))
+(fact 10)
+(fact 100)
+(fact 1000)
+(sqrt -1)
+(expt (sqrt -1) (sqrt -1))
+(sqrt 2.00000000000000000000000000000000000000000000000000000000000)
+(* _ _)
+
+(ref [1 2 3 4 5 6] 3)
+
+(throw 'err)
+(try (throw 'err) 'recovery)
+(fibo 10)
+(dynload "fftest")
+(fibo 10)

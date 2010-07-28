@@ -1,0 +1,2 @@
+
+clObject& readObject(string parenStack="... ");
