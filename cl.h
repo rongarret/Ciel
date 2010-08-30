@@ -73,7 +73,7 @@ class clSequence : public clObject {
 
 ///////////////////////////////
 //
-//  Wrappers for native types (currently used only for strings)
+//  Wrappers for native types (string and characters)
 //
 template<class T>
 class clWrapper : public clObject {
@@ -91,6 +91,8 @@ class clWrapper : public clObject {
 //  Strings
 typedef clWrapper<string> clString;
 
+// Characters
+typedef clWrapper<char> clChar;
 
 /////////////////////////////
 ///
@@ -127,8 +129,6 @@ namespace std {
 
 typedef
   map<clObject*, clObject*, less<void*> >
-      //    gc_allocator<pair<clObject*, clObject*> > >
-  //gc_hash_map
   gc_map;
 
 class clMap : public clObject {

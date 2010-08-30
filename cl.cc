@@ -28,6 +28,16 @@ void clString::print(ostream &os) { os << '"' << theThing << '"'; }
 
 ///////////////////////
 ///
+///  Characters
+///
+
+template<> const string clChar::name = "Character";
+
+template<>
+void clChar::print(ostream &os) { os << "'" << theThing << "'"; }
+
+///////////////////////
+///
 ///  Dictionaries
 ///
 

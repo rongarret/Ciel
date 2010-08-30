@@ -125,7 +125,11 @@ PRIMOP(ref, 2) {
   try {
     return the<clVector>(args[0])[args[1]];
   } catch (bad_cast) {
-    return the<clMap>(args[0]).ref(args[1]);
+    try {
+      return *new clChar(the<clString>(args[0]).theThing[args[1]]);
+    } catch(bad_cast) {  // This is getting ugly -- we need an object system
+      return the<clMap>(args[0]).ref(args[1]);
+    }
   }
 }
 
