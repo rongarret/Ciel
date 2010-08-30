@@ -1,3 +1,14 @@
+/////////////////////////////////
+///
+///  A minimal C++ stream-like interface to readline.  This really ought
+///  to be done with a basic_streambuf<char> (I think) but that doesn't
+///  seem to work in g++ 2.96.  :-(
+///
+///  Update 8/2010: g++ is now up to version 4 so it might be worthwhile
+///  trying basic_streambuf again.  On the other hand, what's here does
+///  seem to work.
+///
+
 #include <unistd.h>  // For isatty()
 
 #ifdef USE_GNU_READLINE
@@ -8,6 +19,9 @@
 #include <readline/history.h>
 
 #else
+
+// Provide a minimalist alternative in case the user doesn't have
+// readline installed.
 
 #include <iostream>
 #include <string>
@@ -22,7 +36,7 @@ char *readline(const char* prompt) {
   }
   getline(cin, s);
   if (cin.eof()) return 0;
-  char *b = (char *)malloc(strlen(s.c_str()));
+  char *b = (char *)malloc(strlen(s.c_str()));  // Hm, need to heck for leaks
   strcpy(b, s.c_str());
   return b;
 }
@@ -31,15 +45,14 @@ void add_history(char *) {}
 
 #endif
 
-#include <stdlib.h>
-#include "rlstream.h"
+//////////////////////////////////
+//
+// Actual rlstream code starts here
+//
 
-/////////////////////////////////
-///
-///  A minimal C++ stream-like interface to readline.  This really ought
-///  to be done with a basic_streambuf<char> (I think) but that doesn't
-///  seem to work in g++ 2.96.  :-(
-///
+#include <stdlib.h>
+#include <cctype>       // For isspace
+#include "rlstream.h"
 
 rlstream::rlstream(char * _prompt) {
   ptr = buffer = 0;
