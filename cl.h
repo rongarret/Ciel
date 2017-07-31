@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <ext/hash_map>
+#include <unordered_map>
 #include <map>
 #include <vector>
 #include <typeinfo>  // For bad_cast exception type
@@ -99,14 +99,8 @@ typedef clWrapper<char> clChar;
 ///  Dictionaries
 ///
 
-// Some STL wizardry to make hashmaps work with strings and pointers
-namespace __gnu_cxx {
-  template<> struct hash<string> {
-    int operator()(const string& x) const {
-      return __stl_hash_string(x.c_str());
-    }
-  };
-
+// Provide a hash implementation for pointers
+namespace std {
   template<> struct hash<void*> {
     inline int operator()(void* const &x) const { return (long)x; }
   };
@@ -115,7 +109,7 @@ namespace __gnu_cxx {
 typedef gc_allocator<clObject*> gc_alloc;
 
 typedef
-  hash_map<clObject*, clObject*, hash<void*>, equal_to<void*>,
+  unordered_map<clObject*, clObject*, hash<void*>, equal_to<void*>,
 	   gc_allocator<pair<clObject*, clObject*> > >
   gc_hash_map;
 
@@ -298,7 +292,7 @@ clSymbol& intern(string s);
 extern clSymbol& QUOTE;
 
 typedef
-  hash_map<string, clSymbol*, hash<string>, equal_to<string>,
+  unordered_map<string, clSymbol*, hash<string>, equal_to<string>,
 	   gc_allocator<pair<string, clSymbol*> > >
   gc_symbol_hash_map;
 
