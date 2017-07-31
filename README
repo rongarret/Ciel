@@ -6,10 +6,11 @@ To build Ciel you will need:
 
 * The Boehm GC (http://www.hpl.hp.com/personal/Hans_Boehm/gc/)
 * CLN, the Class Library for Numbers (http://www.ginac.de/CLN/)
+* The GNU Readline Library (https://cnswww.cns.cwru.edu/php/chet/readline/rltop.html)
 * g++
 
-To build Ciel, just install libgc and libcln, then make.  Ciel has been
-built and run on Linux and OS X Snow Leopard.
+To build Ciel, just install libgc, libcln and librl, then make.  Ciel has
+been built and run on Linux and OS X Snow Leopard.
 
 At the moment Ciel is interpreted, but it is designed to be compiled
 straighforwardly into C++, and thence into native code.  Some examples of
